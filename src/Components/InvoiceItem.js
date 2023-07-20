@@ -49,6 +49,7 @@ class ItemRow extends React.Component {
     const sanitizedValue = value.replace(/,/g, '');
     const formattedValue = Number(sanitizedValue).toLocaleString()
     setNumber(formattedValue);
+    return formattedValue;
   }
 
   render() {
@@ -60,18 +61,9 @@ class ItemRow extends React.Component {
             cellData={{
             type: "text",
             name: "name",
-            placeholder: "Item name",
+            placeholder: "Description of Service or Product",
             value: this.props.item.name,
             id: this.props.item.id,
-          }}/>
-          <EditableField
-            onItemizedItemEdit={this.props.onItemizedItemEdit}
-            cellData={{
-            type: "text",
-            name: "description",
-            placeholder: "Item description",
-            value: this.props.item.description,
-            id: this.props.item.id
           }}/>
         </td>
         <td style={{minWidth: '70px'}}>
@@ -93,8 +85,7 @@ class ItemRow extends React.Component {
             leading: this.props.currency,
             type: "number",
             name: "price",
-            min: 1,
-            step: "0.01",
+            step: "1.00",
             presicion: 2,
             textAlign: "text-end",
             value: this.props.item.price,
