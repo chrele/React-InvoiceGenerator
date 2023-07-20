@@ -33,7 +33,7 @@ class InvoiceForm extends React.Component {
             id: 0,
             name: '',
             description: '',
-            price: '1.00',
+            price: '1000.00',
             quantity: 1
           }
         ];
@@ -55,7 +55,7 @@ class InvoiceForm extends React.Component {
         var items = {
           id: id,
           name: '',
-          price: '1.00',
+          price: '1,000.00',
           description: '',
           quantity: 1
         }

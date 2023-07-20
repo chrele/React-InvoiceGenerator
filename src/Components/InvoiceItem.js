@@ -37,9 +37,20 @@ class InvoiceItem extends React.Component {
 
 }
 class ItemRow extends React.Component {
+  
   onDelEvent() {
     this.props.onDelEvent(this.props.item);
   }
+
+  handleChange(evt) {
+    const { useState } = React;
+    const [number, setNumber] = useState('');
+    const { value } = evt.target;
+    const sanitizedValue = value.replace(/,/g, '');
+    const formattedValue = Number(sanitizedValue).toLocaleString()
+    setNumber(formattedValue);
+  }
+
   render() {
     return (
       <tr>
@@ -75,7 +86,7 @@ class ItemRow extends React.Component {
             id: this.props.item.id,
           }}/>
         </td>
-        <td style={{minWidth: '130px'}}>
+        <td style={{minWidth: '150px'}}>
           <EditableField
             onItemizedItemEdit={this.props.onItemizedItemEdit}
             cellData={{
@@ -87,7 +98,7 @@ class ItemRow extends React.Component {
             presicion: 2,
             textAlign: "text-end",
             value: this.props.item.price,
-            id: this.props.item.id,
+            id: this.props.item.id
           }}/>
         </td>
         <td className="text-center" style={{minWidth: '50px'}}>
