@@ -5,6 +5,9 @@ import { Row, Col, Button , Form, Card, InputGroup } from 'react-bootstrap';
 import InvoiceItem from './InvoiceItem';
 import InvoiceModal from './InvoiceModal';
 
+function pad(n) {return n < 10 ? "0"+n : n;}
+
+
 class InvoiceForm extends React.Component {
 
     constructor(props) {
@@ -13,7 +16,7 @@ class InvoiceForm extends React.Component {
           isOpen: false,
           currency: 'Rp',
           currentDate: '',
-          invoiceNumber: 1,
+          invoiceNumber: new Date().getFullYear() + pad (new Date().getMonth()+1) + pad(new Date().getDate()) + '001',
           dateOfIssue: '',
           billTo: '',
           billToEmail: '',
@@ -142,9 +145,9 @@ class InvoiceForm extends React.Component {
                   <Col md={8} lg={9}>
                     <Card className="p-4 p-xl-5 my-3 my-xl-4">
                       <div className="d-flex flex-row align-items-start justify-content-between mb-3">
-                        <div class="d-flex flex-column">
+                        <div className="d-flex flex-column">
                           <div className="d-flex flex-column">
-                            <div class="mb-2">
+                            <div className="mb-2">
                               <span className="fw-bold">Current&nbsp;Date:&nbsp;</span>
                               <span className="current-date">{new Date().toLocaleDateString()}</span>
                             </div>
@@ -158,8 +161,8 @@ class InvoiceForm extends React.Component {
                         </div>
                         <div className="d-flex flex-row align-items-center">
                           <span className="fw-bold me-2">Invoice&nbsp;Number:&nbsp;</span>
-                          <Form.Control type="number" value={this.state.invoiceNumber} name={"invoiceNumber"} onChange={(event) => this.editField(event)} min="1" style={{
-                              maxWidth: '70px'
+                          <Form.Control type="number" value={this.state.invoiceNumber} name={"invoiceNumber"} onChange={(event) => this.editField(event)} style={{
+                              maxWidth: '115px'
                             }} required="required"/>
                         </div>
                       </div>
@@ -242,7 +245,7 @@ class InvoiceForm extends React.Component {
                       <Form.Group className="my-3">
                         <Form.Label className="fw-bold">Tax rate:</Form.Label>
                         <InputGroup className="my-1 flex-nowrap">
-                          <Form.Control name="taxRate" type="number" value={this.state.taxRate} onChange={(event) => this.editField(event)} className="bg-white border" placeholder="0.0" min="0.00" step="0.01" max="100.00"/>
+                          <Form.Control name="taxRate" type="number" value={this.state.taxRate} onChange={(event) => this.editField(event)} className="bg-white border" placeholder="0.0" min="0.00" step="0.000001" max="100.00"/>
                           <InputGroup.Text className="bg-light fw-bold text-secondary small">
                             %
                           </InputGroup.Text>
@@ -251,7 +254,7 @@ class InvoiceForm extends React.Component {
                       <Form.Group className="my-3">
                         <Form.Label className="fw-bold">Discount rate:</Form.Label>
                         <InputGroup className="my-1 flex-nowrap">
-                          <Form.Control name="discountRate" type="number" value={this.state.discountRate} onChange={(event) => this.editField(event)} className="bg-white border" placeholder="0.0" min="0.00" step="0.01" max="100.00"/>
+                          <Form.Control name="discountRate" type="number" value={this.state.discountRate} onChange={(event) => this.editField(event)} className="bg-white border" placeholder="0.0" min="0.00" step="0.000001" max="100.00"/>
                           <InputGroup.Text className="bg-light fw-bold text-secondary small">
                             %
                           </InputGroup.Text>
